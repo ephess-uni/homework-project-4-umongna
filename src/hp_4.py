@@ -55,9 +55,9 @@ def fees_report(infile, outfile):
 
     charge = defaultdict()
     for (x, y, z) in zip(patron_id, returned_date,due_date):
-        days = (datetime.strptime(y, '%m/%d/%Y') - (datetime.strptime(c, '%m/%d/%Y')).days
+        days = (datetime.strptime(y, '%m/%d/%Y') - datetime.strptime(z, '%m/%d/%Y')).days
         if days<0:
-                latefee = 0.00
+            latefee = 0.00
         else:
             latefee = round(days*0.50,2)
         if x in res:
