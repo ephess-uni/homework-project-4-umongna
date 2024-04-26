@@ -24,7 +24,7 @@ def date_range(start, n):
     if isinstance(n, int) is False:
         raise TypeError(" n must be a int")
 
-    r_date = datetime.strpttime(start, '%Y-%m-%d')
+    r_date = datetime.strptime(start, '%Y-%m-%d')
     res = []
     for i in range(n-1):
         r_date += timedelta(days=1)
