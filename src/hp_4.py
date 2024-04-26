@@ -64,7 +64,6 @@ def fees_report(infile, outfile):
             charge[a] += latefee
         else:
             charge[a] = latefee
-
     res = [[str(key), str('{:.2f}'.format(val))] for key, val in charge.items()]
 
     with open(outfile, 'w') as file:
