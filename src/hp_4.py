@@ -1,4 +1,4 @@
-# hp_4.py
+    # hp_4.py
 #
 from datetime import datetime, timedelta
 from csv import DictReader, DictWriter
@@ -60,7 +60,7 @@ def fees_report(infile, outfile):
             latefee = 0.00
         else:
             latefee = round(days*0.50,2)
-        if x in res:
+        if x in charge:
             charge[a] += latefee
         else:
             charge[a] = latefee
