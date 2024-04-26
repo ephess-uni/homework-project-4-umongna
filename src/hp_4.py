@@ -44,17 +44,17 @@ def fees_report(infile, outfile):
     """Calculates late fees per patron id and writes a summary report to
     outfile."""
     patron_id =[]
-    due_date = []
-    returned_date = []
+    date_due = []
+    date_returned = []
     with open(infile) as file:
         reader = DictReader(file)
         for i in reader:
             patron_id.append(i["patron_id"])
-            due_date.append(i['due_date'])
-            returned_date.append(i['returned_date'])
+            date_due.append(i['date_due'])
+            date_returned.append(i['date_returned'])
 
     charge = defaultdict()
-    for (x, y, z) in zip(patron_id, returned_date,due_date):
+    for (x, y, z) in zip(patron_id, date_returned,date_due):
         days = (datetime.strptime(y, '%m/%d/%Y') - datetime.strptime(z, '%m/%d/%Y')).days
         if days<0:
             latefee = 0.00
