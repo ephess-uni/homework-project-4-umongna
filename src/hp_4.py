@@ -61,9 +61,9 @@ def fees_report(infile, outfile):
         else:
             latefee = round(days*0.50,2)
         if x in charge:
-            charge[a] += latefee
+            charge[x] += latefee
         else:
-            charge[a] = latefee
+            charge[x] = latefee
     res = [[str(key), str('{:.2f}'.format(val))] for key, val in charge.items()]
 
     with open(outfile, 'w') as file:
