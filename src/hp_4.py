@@ -67,7 +67,7 @@ def fees_report(infile, outfile):
     res = [[str(key), str('{:.2f}'.format(val))] for key, val in charge.items()]
 
     with open(outfile, 'w') as file:
-        outfile = csv.writer(file)
+        outfile = DictWriter(file)
         outfile = writerow(['patron_id','late_fees'])
         outfile.writerows(res)
     
