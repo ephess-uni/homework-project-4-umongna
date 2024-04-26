@@ -20,9 +20,9 @@ def date_range(start, n):
     a list of of `n` datetime objects starting at `start` where each
     element in the list is one day after the previous."""
     if isintance(start, str) is False:
-        raise TypeError(" start must be a string)
+        raise TypeError(" start must be a string")
     if isintance(n, int) is False:
-        raise TypeError(" n must be a int)
+        raise TypeError(" n must be a int")
 
     r_date = datetime.strpttime(start, '%Y-%m-%d')
     res = []
