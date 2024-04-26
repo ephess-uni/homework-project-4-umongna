@@ -25,7 +25,7 @@ def date_range(start, n):
         raise TypeError(" n must be a int")
 
     r_date = datetime.strptime(start, '%Y-%m-%d')
-    res = []
+    res = [r_date]
     for i in range(n-1):
         r_date += timedelta(days=1)
         res.append(r_date)
