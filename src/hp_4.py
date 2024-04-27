@@ -46,13 +46,13 @@ def fees_report(infile, outfile):
     charge = defaultdict(float)
     with open(infile, 'r') as file:
         reader = DictReader(file)
-        #for (x, y, z) in zip(patron_id, date_returned,date_due):
-        days = (datetime.strptime(row['date_returned'], '%m/%d/%Y') - datetime.strptime(row['due_date'], '%m/%d/%Y')).days
-        if days<0:
-            latefee = 0.00
-        else:
-            latefee = days*0.25
-            charge[row['patron_id']] += latefee
+        for r in reader:
+            days = (datetime.strptime(r['date_returned'], '%m/%d/%Y') - datetime.strptime(r['due_date'], '%m/%d/%Y')).days
+            if days<0:
+                latefee = 0.00
+            else:
+                latefee = days*0.25
+                charge[row['patron_id']] += latefee
 
     with open(outfile, 'w', newline = '') as file:
         fieldnames = ['patron_id', 'late_fees']
