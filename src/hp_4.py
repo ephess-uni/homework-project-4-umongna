@@ -47,7 +47,7 @@ def fees_report(infile, outfile):
     with open(infile, 'r') as file:
         reader = DictReader(file)
         for r in reader:
-            days = (datetime.strptime(r['date_returned'], '%m/%d/%Y') - datetime.strptime(r['due_date'], '%m/%d/%Y')).days
+            days = (datetime.strptime(r['date_returned'], '%m/%d/%Y') - datetime.strptime(r['date_due'], '%m/%d/%Y')).days
             if days<0:
                 latefee = 0.00
             else:
