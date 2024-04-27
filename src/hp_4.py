@@ -59,7 +59,7 @@ def fees_report(infile, outfile):
         outfile = DictWriter(file, fieldnames = fieldnames)
         outfile.writeheader()
         for patron_id, latefee in charge.items():
-            outfile.writerows({'patron_id' : patron_id, 'late_fees' : f"{latefee:.2f}"})
+            outfile.writerow({'patron_id' : patron_id, 'late_fees' : f"{latefee:.2f}"})
     
 
 # The following main selection block will only run when you choose
