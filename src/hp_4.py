@@ -43,34 +43,23 @@ def add_date_range(values, start_date):
 def fees_report(infile, outfile):
     """Calculates late fees per patron id and writes a summary report to
     outfile."""
-    patron_id =[]
-    date_due = []
-    date_returned = []
-    with open(infile) as file:
+    charge = defaultdict(float)
+    with open(infile, 'r') as file:
         reader = DictReader(file)
-        for i in reader:
-            patron_id.append(i["patron_id"])
-            date_due.append(i['date_due'])
-            date_returned.append(i['date_returned'])
-
-    charge = defaultdict()
-    for (x, y, z) in zip(patron_id, date_returned,date_due):
-        days = (datetime.strptime(y, '%m/%d/%Y') - datetime.strptime(z, '%m/%d/%Y')).days
+        #for (x, y, z) in zip(patron_id, date_returned,date_due):
+        days = (datetime.strptime(row['date_returned'], '%m/%d/%Y') - datetime.strptime(row['due_date'], '%m/%d/%Y')).days
         if days<0:
             latefee = 0.00
         else:
-            latefee = round(days*0.50,2)
-        if x in charge:
-            charge[x] += latefee
-        else:
-            charge[x] = latefee
-    res = [[str(key), str('{:.2f}'.format(val))] for key, val in charge.items()]
+            latefee = days*0.25
+            charge[row['patron_id']] += latefee
 
-    with open(outfile, 'w') as file:
+    with open(outfile, 'w', newline = '') as file:
         fieldnames = ['patron_id', 'late_fees']
         outfile = DictWriter(file, fieldnames = fieldnames)
         outfile.writeheader()
-        outfile.writerows(res)
+        for patron_id, latefee in charge.items():
+            outfile.writerows({'patron_id' : patron_id, 'late_fees' : f"{latefee:.2f}"})
     
 
 # The following main selection block will only run when you choose
