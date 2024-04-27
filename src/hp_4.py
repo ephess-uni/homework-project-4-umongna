@@ -52,7 +52,7 @@ def fees_report(infile, outfile):
                 latefee = 0.00
             else:
                 latefee = days*0.25
-                charge[row['patron_id']] += latefee
+                charge[r['patron_id']] += latefee
 
     with open(outfile, 'w', newline = '') as file:
         fieldnames = ['patron_id', 'late_fees']
